@@ -1,5 +1,7 @@
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,10 +9,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class RegistrationTests {
+
     @BeforeEach
     void cleanUpDatabase() throws SQLException {
         Connection connection = DriverManager.getConnection(
@@ -30,18 +36,19 @@ public class RegistrationTests {
                 .body(
                         """
                 {
-                    "lastName": "Testas",
-                    "firstName": "Testas",
+                    "lastName": "Rasiene",
+                    "firstName": "Rasa",
                     "country": "Lithuania",
                     "password": "Testas1*",
-                    "displayName": "Testas5",
+                    "displayName": "RasaRasiene",
+                    "gender": "Other",
                     "roles": [
                         {
                             "id": 1
                         }
                     ],
-                    "dateOfBirth": "1900-01-01",
-                    "email": "testas3@testas.lt"
+                    "dateOfBirth": "1980-09-25",
+                    "email": "rasa@rasiene.lt"
                 }
                 """)
                 .contentType(ContentType.JSON)
@@ -49,8 +56,45 @@ public class RegistrationTests {
                 .request("POST", "/register")
                 .then()
                 .assertThat()
-                .statusCode(201);
-
+                .statusCode(201)
+                .body(
+                        "id",
+                        not(equalTo(0)),
+                        "firstName",
+                        equalTo("Rasa"),
+                        "lastName",
+                        equalTo("Rasiene"),
+                        "country",
+                        equalTo("Lithuania"),
+                        "password",
+                        not(equalTo("Testas1*")),
+                        "displayName",
+                        equalTo("RasaRasiene"),
+                        "gender",
+                        equalTo("Other"),
+                        "dateOfBirth",
+                        equalTo("1980-09-25"),
+                        "email",
+                        equalTo("rasa@rasiene.lt"),
+                        "roles",
+                        hasSize(1),
+                        "roles[0].id",
+                        equalTo(1),
+                        "authorities",
+                        hasSize(1),
+                        "authorities[0].id",
+                        equalTo(1),
+                        "username",
+                        equalTo("vardens.pavardenis@techin.lt"),
+                        "accountNonLocked",
+                        equalTo(true),
+                        "accountNonExpired",
+                        equalTo(true),
+                        "credentialsNonExpired",
+                        equalTo(true),
+                        "enabled",
+                        equalTo(true)
+                        );
     }
 }
 
