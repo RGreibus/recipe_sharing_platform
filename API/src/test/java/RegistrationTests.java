@@ -95,9 +95,9 @@ public class RegistrationTests {
                         "credentialsNonExpired",
                         equalTo(true),
                         "enabled",
-                        equalTo(true)
-                        );
+                        equalTo(true));
     }
+
     @Test
     void whenVisitorRegistersWithTwoRoles_thenReturn201AndResponseBody() {
         given()
@@ -168,9 +168,9 @@ public class RegistrationTests {
                         "credentialsNonExpired",
                         equalTo(true),
                         "enabled",
-                        equalTo(true)
-                );
+                        equalTo(true));
     }
+
     @ParameterizedTest
     @CsvFileSource(resources = "/genders.csv")
     void whenVisitorRegistersWithTwoRolesAndGender_thenReturn201AndResponseBody(String gender) {
@@ -239,8 +239,67 @@ public class RegistrationTests {
                         "credentialsNonExpired",
                         equalTo(true),
                         "enabled",
-                        equalTo(true)
-                );
+                        equalTo(true));
+    }
+    @Test
+    void whenVisitorRegistersWithoutGenderSelection_thenReturn201AndResponseBody() {
+        given()
+                .body(
+                        """
+                {
+                    "lastName": "Rasiene",
+                    "firstName": "Rasa",
+                    "country": "Lithuania",
+                    "password": "Testas1*",
+                    "displayName": "RasaRasiene",
+                    "roles": [
+                        {"id": 1}
+                    ],
+                    "dateOfBirth": "1980-09-25",
+                    "email": "rasa@rasiene.lt"
+                }
+                """)
+                .contentType(ContentType.JSON)
+                .when()
+                .request("POST", "/register")
+                .then()
+                .assertThat()
+                .statusCode(201)
+                .body(
+                        "id",
+                        not(equalTo(0)),
+                        "firstName",
+                        equalTo("Rasa"),
+                        "lastName",
+                        equalTo("Rasiene"),
+                        "country",
+                        equalTo("Lithuania"),
+                        "password",
+                        not(equalTo("Testas1*")),
+                        "displayName",
+                        equalTo("RasaRasiene"),
+                        "dateOfBirth",
+                        equalTo("1980-09-25"),
+                        "email",
+                        equalTo("rasa@rasiene.lt"),
+                        "roles",
+                        hasSize(1),
+                        "roles[0].id",
+                        equalTo(1),
+                        "authorities",
+                        hasSize(1),
+                        "authorities[0].id",
+                        equalTo(1),
+                        "username",
+                        equalTo("rasa@rasiene.lt"),
+                        "accountNonLocked",
+                        equalTo(true),
+                        "accountNonExpired",
+                        equalTo(true),
+                        "credentialsNonExpired",
+                        equalTo(true),
+                        "enabled",
+                        equalTo(true));
     }
 }
 
