@@ -85,7 +85,7 @@ public class RegistrationTests {
                         "authorities[0].id",
                         equalTo(1),
                         "username",
-                        equalTo("vardens.pavardenis@techin.lt"),
+                        equalTo("rasa@rasiene.lt"),
                         "accountNonLocked",
                         equalTo(true),
                         "accountNonExpired",
@@ -95,6 +95,79 @@ public class RegistrationTests {
                         "enabled",
                         equalTo(true)
                         );
+    }
+    @Test
+    void whenVisitorRegistersWithTwoRoles_thenReturn201AndResponseBody() {
+        given()
+                .body(
+                        """
+                {
+                    "lastName": "Rasiene",
+                    "firstName": "Rasa",
+                    "country": "Lithuania",
+                    "password": "Testas1*",
+                    "displayName": "RasaRasiene",
+                    "gender": "Other",
+                    "roles": [
+                        {
+                            "id": 1
+                        },
+                        {
+                            "id": 2
+                        }
+                    ],
+                    "dateOfBirth": "1980-09-25",
+                    "email": "rasa@rasiene.lt"
+                }
+                """)
+                .contentType(ContentType.JSON)
+                .when()
+                .request("POST", "/register")
+                .then()
+                .assertThat()
+                .statusCode(201)
+                .body(
+                        "id",
+                        not(equalTo(0)),
+                        "firstName",
+                        equalTo("Rasa"),
+                        "lastName",
+                        equalTo("Rasiene"),
+                        "country",
+                        equalTo("Lithuania"),
+                        "password",
+                        not(equalTo("Testas1*")),
+                        "displayName",
+                        equalTo("RasaRasiene"),
+                        "gender",
+                        equalTo("Other"),
+                        "dateOfBirth",
+                        equalTo("1980-09-25"),
+                        "email",
+                        equalTo("rasa@rasiene.lt"),
+                        "roles",
+                        hasSize(2),
+                        "roles[0].id",
+                        equalTo(1),
+                        "roles[1].id",
+                        equalTo(2),
+                        "authorities",
+                        hasSize(2),
+                        "authorities[0].id",
+                        equalTo(1),
+                        "authorities[1].id",
+                        equalTo(2),
+                        "username",
+                        equalTo("rasa@rasiene.lt"),
+                        "accountNonLocked",
+                        equalTo(true),
+                        "accountNonExpired",
+                        equalTo(true),
+                        "credentialsNonExpired",
+                        equalTo(true),
+                        "enabled",
+                        equalTo(true)
+                );
     }
 }
 
