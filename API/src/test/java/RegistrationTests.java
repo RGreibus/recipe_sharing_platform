@@ -449,6 +449,58 @@ void whenVisitorRegistersWithInvalidFirstName_thenReturn400AndFirstNameValidatio
                 .body(
                         "displayName", equalTo("You can only enter letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
     }
+    @Test
+    void whenVisitorRegistersWithNotUniqueDisplayName_thenReturn400AndDisplayNameAlreadyExists() {
+        String requestBody = """
+        {
+            "firstName": "Rasa",
+            "lastName": "Rasiene",
+            "displayName": "rasos Lasas",
+            "password": "RasaRasiene123!",
+            "email": "rasa3@gmail.com",
+            "roles": [
+                {"id": 1}
+            ],
+            "dateOfBirth": "1980-09-25",
+            "country": "Lithuania"
+        }
+        """;
+
+        given()
+                .body(requestBody)
+                .contentType(ContentType.JSON)
+                .when()
+                .request("POST", "/register")
+                .then()
+                .assertThat()
+                .statusCode(201);
+
+        String secondRequestBody = """
+        {
+            "firstName": "Rasa",
+            "lastName": "Rasiene",
+            "displayName": "rasos Lasas",
+            "password": "RasaRasiene123!",
+            "email": "rasa40@gmail.com",
+            "roles": [
+                {"id": 1}
+            ],
+            "dateOfBirth": "1980-09-25",
+            "country": "Lithuania"
+        }
+        """;
+
+        given()
+                .body(secondRequestBody)
+                .contentType(ContentType.JSON)
+                .when()
+                .request("POST", "/register")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(
+                        "displayName", equalTo("Already exists"));
+    }
 }
 
 
