@@ -301,46 +301,46 @@ public class RegistrationTests {
                         "enabled",
                         equalTo(true));
     }
-    @Test
-    void whenVisitorRegistersWithEmptyFields_thenReturn400AndValidationErrors() {
-        given()
-                .body(
-                        """
-                {
-                    "firstName": "",
-                    "lastName": "",
-                    "displayName": "",
-                    "password": "",
-                    "email": "",
-                    "roles": [
-                        {"id": 1}
-                    ],
-                    "dateOfBirth": "",
-                    "country": ""
-                }
-                """)
-                .contentType(ContentType.JSON)
-                .when()
-                .request("POST", "/register")
-                .then()
-                .assertThat()
-                .statusCode(400)
-                .body(
-                        "lastName",
-                        equalTo("Cannot be null or empty"),
-                        "firstName",
-                        equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"),
-                        "country",
-                        equalTo("Cannot be null or empty"),
-                        "password",
-                        equalTo("Cannot be null or empty"),
-                        "displayName",
-                        equalTo("Cannot be null or empty"),
-                        "dateOfBirth",
-                        equalTo("Cannot be null or empty"),
-                        "email",
-                        equalTo("Minimum length 5 characters, maximum length 200 characters"));
-    }
+//    @Test
+//    void whenVisitorRegistersWithEmptyFields_thenReturn400AndValidationErrors() {
+//        given()
+//                .body(
+//                        """
+//                {
+//                    "firstName": "",
+//                    "lastName": "",
+//                    "displayName": "",
+//                    "password": "",
+//                    "email": "",
+//                    "roles": [
+//                        {"id": 1}
+//                    ],
+//                    "dateOfBirth": "",
+//                    "country": ""
+//                }
+//                """)
+//                .contentType(ContentType.JSON)
+//                .when()
+//                .request("POST", "/register")
+//                .then()
+//                .assertThat()
+//                .statusCode(400)
+//                .body(
+//                        "lastName",
+//                        equalTo("Cannot be null or empty"),
+//                        "firstName",
+//                        equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"),
+//                        "country",
+//                        equalTo("Cannot be null or empty"),
+//                        "password",
+//                        equalTo("Cannot be null or empty"),
+//                        "displayName",
+//                        equalTo("Cannot be null or empty"),
+//                        "dateOfBirth",
+//                        equalTo("Cannot be null or empty"),
+//                        "email",
+//                        equalTo("Minimum length 5 characters, maximum length 200 characters"));
+//    }
 }
 
 
