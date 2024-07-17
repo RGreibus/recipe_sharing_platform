@@ -422,6 +422,33 @@ void whenVisitorRegistersWithInvalidFirstName_thenReturn400AndFirstNameValidatio
                 .body(
                         "lastName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
     }
+    @Test
+    void whenVisitorRegistersWithDisplayNameContainsTwoConsecutiveSpaces_thenReturn400AndDisplayNameValidationError() {
+        given()
+                .body(
+                        """
+                {
+                    "firstName": "Rasa",
+                    "lastName": "Rasiene",
+                    "displayName": "rasos  Lasas",
+                    "password": "RasaRasiene123!",
+                    "email": "rasa1@gmail.com",
+                    "roles": [
+                        {"id": 1}
+                    ],
+                    "dateOfBirth": "1980-09-25",
+                    "country": "Lithuania"
+                }
+                """)
+                .contentType(ContentType.JSON)
+                .when()
+                .request("POST", "/register")
+                .then()
+                .assertThat()
+                .statusCode(400)
+                .body(
+                        "displayName", equalTo("You can only enter letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
+    }
 }
 
 
