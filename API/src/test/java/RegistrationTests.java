@@ -341,6 +341,33 @@ public class RegistrationTests {
 //                        "email",
 //                        equalTo("Minimum length 5 characters, maximum length 200 characters"));
 //    }
+@Test
+void whenVisitorRegistersWithInvalidFirstName_thenReturn400AndFirstNameValidationError() {
+    given()
+            .body(
+                    """
+            {
+                "firstName": "Rasa1",
+                "lastName": "Rasiene",
+                "displayName": "rasosLasass",
+                "password": "RasaRasiene123!",
+                "email": "rasa0@gmail.com",
+                "roles": [
+                    {"id": 1}
+                ],
+                "dateOfBirth": "1980-09-25",
+                "country": "Lithuania"
+            }
+            """)
+            .contentType(ContentType.JSON)
+            .when()
+            .request("POST", "/register")
+            .then()
+            .assertThat()
+            .statusCode(400)
+            .body(
+                    "firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+     }
 }
 
 
