@@ -393,7 +393,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+                        "size()", is(1),"firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
     }
     @Test
     void whenVisitorRegistersWithInvalidLastName_thenReturn400AndLastNameValidationError() {
