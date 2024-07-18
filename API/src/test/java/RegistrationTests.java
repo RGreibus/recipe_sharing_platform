@@ -447,7 +447,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "displayName", equalTo("You can only enter letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
+                        "size()", is(1),"displayName", equalTo("You can only enter letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
     }
     @Test
     void whenVisitorRegistersWithNotUniqueDisplayName_thenReturn400AndDisplayNameAlreadyExists() {
