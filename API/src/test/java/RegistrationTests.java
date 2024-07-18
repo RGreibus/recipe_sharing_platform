@@ -499,7 +499,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "displayName", equalTo("Already exists"));
+                        "size()", is(1),"displayName", equalTo("Already exists"));
     }
 }
 
