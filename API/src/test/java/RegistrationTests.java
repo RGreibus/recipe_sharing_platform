@@ -342,7 +342,7 @@ public class RegistrationTests {
 //                        equalTo("Minimum length 5 characters, maximum length 200 characters"));
 //    }
 @Test
-void whenVisitorRegistersWithInvalidFirstName_thenReturn400AndFirstNameValidationError() {
+void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError() {
     given()
             .body(
                     """
@@ -366,7 +366,7 @@ void whenVisitorRegistersWithInvalidFirstName_thenReturn400AndFirstNameValidatio
             .assertThat()
             .statusCode(400)
             .body(
-                    "firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+                    "size()", is(1),"firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
      }
     @Test
     void whenVisitorRegistersWithFirstNameFirstLetterNotUppercase_thenReturn400AndFirstNameValidationError() {
