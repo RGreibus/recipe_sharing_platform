@@ -366,7 +366,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
             .assertThat()
             .statusCode(400)
             .body(
-                    "size()", is(1),"firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+                    "size()", is(1),"firstName", equalTo("You can only enter English letters. First letter must be capital. At least 2 characters long"));
      }
     @Test
     void whenVisitorRegistersWithFirstNameFirstLetterNotUppercase_thenReturn400AndFirstNameValidationError() {
@@ -393,7 +393,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "size()", is(1),"firstName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+                        "size()", is(1),"firstName", equalTo("You can only enter English letters. First letter must be capital. At least 2 characters long"));
     }
     @Test
     void whenVisitorEntersNumberInLastName_thenReturn400AndLastNameValidationError() {
@@ -420,7 +420,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "size()", is(1),"lastName", equalTo("You can only enter letters. First letter must be capital. At least 2 characters long"));
+                        "size()", is(1),"lastName", equalTo("You can only enter English letters. First letter must be capital. At least 2 characters long"));
     }
     @Test
     void whenVisitorRegistersWithDisplayNameContainsTwoConsecutiveSpaces_thenReturn400AndDisplayNameValidationError() {
@@ -447,7 +447,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .assertThat()
                 .statusCode(400)
                 .body(
-                        "size()", is(1),"displayName", equalTo("You can only enter letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
+                        "size()", is(1),"displayName", equalTo("You can only enter English letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words"));
     }
     @Test
     void whenVisitorRegistersWithNotUniqueDisplayName_thenReturn400AndDisplayNameAlreadyExists() {
@@ -501,6 +501,7 @@ void whenVisitorEntersNumberInFirstName_thenReturn400AndFirstNameValidationError
                 .body(
                         "size()", is(1),"displayName", equalTo("Already exists"));
     }
+
 }
 
 
