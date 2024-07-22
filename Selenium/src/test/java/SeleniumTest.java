@@ -41,4 +41,30 @@ public class SeleniumTest {
         assertEquals("http://localhost:5173/register", driver.getCurrentUrl(), "URL should be the same");
 
     }
+
+    @Test
+    public void testSuccessfulRegistrationWithAllValidCredentials() throws InterruptedException {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
+        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
+    }
 }
