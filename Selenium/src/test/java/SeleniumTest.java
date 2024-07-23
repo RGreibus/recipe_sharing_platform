@@ -252,6 +252,31 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("This field is required", errorMessage.getText(), "Error message should match");
+    }
+    @Test
+    public void testRegistrationWithTooShortLastName() throws InterruptedException {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("R");
+        driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
+        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
+        assertEquals("Minimum symbols: 2", errorMessage.getText(), "Error message should match");
     }
 }
