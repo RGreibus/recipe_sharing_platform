@@ -305,4 +305,30 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Maximum symbols: 100", errorMessage.getText(), "Error message should match");
     }
+    @Test
+    public void testRegistrationWithTwoConsecutiveSpacesInDisplayName() throws InterruptedException {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("rasos  Lasass");
+        driver.findElement(By.id("email")).sendKeys("rasa0@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
+        assertEquals("You can only enter letters or numbers, no more than one space between words", errorMessage.getText(), "Error message should match");
+    }
 }
