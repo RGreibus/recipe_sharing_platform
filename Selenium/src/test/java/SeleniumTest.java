@@ -51,7 +51,7 @@ public class SeleniumTest {
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -76,7 +76,7 @@ public class SeleniumTest {
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -105,7 +105,7 @@ public class SeleniumTest {
         driver.findElement(By.id("email")).sendKeys("rasa0@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -120,7 +120,7 @@ public class SeleniumTest {
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("You can only enter letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
 @Test
 public void testRegistrationWithFirstNameEmptyField() throws InterruptedException {
@@ -131,7 +131,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
     driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
     driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
     driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-    driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+    driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
     driver.findElement(By.id("other")).click();
     driver.findElement(By.id("country")).sendKeys("Lithuania");
     driver.findElement(By.id("privacy-policy")).click();
@@ -158,7 +158,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -173,7 +173,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("Minimum symbols: 2", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTooLongFirstName() throws InterruptedException {
@@ -184,7 +184,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -199,7 +199,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("Maximum symbols: 135", errorMessage.getText(), "Error message should match");
+        assertEquals("Maximum length is 135 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithNumberInLastName() throws InterruptedException {
@@ -210,7 +210,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rasa0@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -225,7 +225,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("You can only enter letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithLastNameEmptyField() throws InterruptedException {
@@ -236,7 +236,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -253,6 +253,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("This field is required", errorMessage.getText(), "Error message should match");
     }
+
     @Test
     public void testRegistrationWithTooShortLastName() throws InterruptedException {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
@@ -262,7 +263,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -277,7 +278,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("Minimum symbols: 2", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTooLongLastName() throws InterruptedException {
@@ -288,7 +289,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -303,7 +304,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("Maximum symbols: 100", errorMessage.getText(), "Error message should match");
+        assertEquals("Maximum length is 100 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTwoConsecutiveSpacesInDisplayName() throws InterruptedException {
@@ -314,7 +315,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("email")).sendKeys("rasa0@gmail.com");
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("1980-09-25");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
@@ -329,6 +330,32 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("You can only enter letters or numbers, no more than one space between words", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words", errorMessage.getText(), "Error message should match");
+    }
+    @Test
+    public void testRegistrationWithDisplayNameEmptyField() throws InterruptedException {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("");
+        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
+        assertEquals("This field is required", errorMessage.getText(), "Error message should match");
     }
 }
