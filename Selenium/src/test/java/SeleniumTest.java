@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -33,6 +34,12 @@ public class SeleniumTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("http://localhost:5173");
+    }
+    @AfterEach
+    void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
