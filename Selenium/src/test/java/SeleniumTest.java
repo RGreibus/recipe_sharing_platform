@@ -365,4 +365,5 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("This field is required", errorMessage.getText(), "Error message should match");
     }
+
 }
