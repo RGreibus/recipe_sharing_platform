@@ -413,5 +413,53 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Already exists", errorMessage.getText(), "Error message should match");
     }
+    @Test
+    public void testRegistrationWithNonUniqueDisplayEmail() throws InterruptedException {
+        // Register the first user with the display name "rasosLasas"
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("rasosLasas");
+        driver.findElement(By.id("email")).sendKeys("rasoslasas@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("rasosLasasLasas"); // Same display name
+        driver.findElement(By.id("email")).sendKeys("rasoslasas@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
+        assertEquals("Already exists", errorMessage.getText(), "Error message should match");
+    }
 
 }
