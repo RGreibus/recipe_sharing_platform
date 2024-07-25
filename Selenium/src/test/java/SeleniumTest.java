@@ -60,13 +60,13 @@ public class SeleniumTest {
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -85,13 +85,13 @@ public class SeleniumTest {
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -114,13 +114,13 @@ public class SeleniumTest {
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -140,13 +140,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
     driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
     driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
     driver.findElement(By.id("other")).click();
-    driver.findElement(By.id("country")).sendKeys("Lithuania");
-    driver.findElement(By.id("privacy-policy")).click();
 
     WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
     sleep(2000);
+
+    driver.findElement(By.id("country")).sendKeys("Lithuania");
+    driver.findElement(By.id("privacy-policy")).click();
 
     ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -167,13 +167,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -193,13 +193,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -219,13 +219,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -245,13 +245,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -272,13 +272,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -298,13 +298,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -324,13 +324,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -350,13 +350,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -367,7 +367,6 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
     }
     @Test
     public void testRegistrationWithNonUniqueDisplayName() throws InterruptedException {
-        // Register the first user with the display name "rasosLasas"
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -377,13 +376,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -398,13 +397,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -425,13 +424,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -446,13 +445,12 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
@@ -472,13 +470,13 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         sleep(2000);
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
 
