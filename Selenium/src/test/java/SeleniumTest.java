@@ -461,5 +461,30 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Already exists", errorMessage.getText(), "Error message should match");
     }
+    @Test
+    public void testRegistrationWithTooLongDisplayName() throws InterruptedException {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("Aelthorin3xvelion4drenivalthor7inorbrastelimundorin8valdristaphonilkaranth3noren1drelvoraximandelbristopharnomelinthorvalian7ophrandorilmurathilon6droximarbelanoreth3drivelanthormion5tarvionelphrasothian7elkaristovrimandelthoran4imunovilthrandionphar3tomal8dralinthoravionel3dramirbelinthorvalpharostilornian5del");
+        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+        driver.findElement(By.id("other")).click();
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
 
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        sleep(2000);
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+
+        sleep(5000);
+
+        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
+        assertEquals("Maximum length is 255 characters", errorMessage.getText(), "Error message should match");
+    }
 }
