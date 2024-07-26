@@ -6,6 +6,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -50,7 +53,7 @@ public class SeleniumTest {
     }
 
     @Test
-    public void testSuccessfulRegistrationWithAllValidCredentials() throws InterruptedException {
+    public void testSuccessfulRegistrationWithAllValidCredentials() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -62,20 +65,23 @@ public class SeleniumTest {
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
 
         assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
     }
     @Test
-    public void testSuccessfulRegistrationMessage() throws InterruptedException {
+    public void testSuccessfulRegistrationMessage() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -87,24 +93,26 @@ public class SeleniumTest {
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
 
         assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
 
         WebElement successMessage = driver.findElement(By.cssSelector("#root > main > div > h2"));
         assertEquals("You have registered successfully. You can now log in", successMessage.getText(), "Success message should match");
-
     }
     @Test
-    public void testRegistrationWithNumberInFirstName() throws InterruptedException {
+    public void testRegistrationWithNumberInFirstName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa1");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -116,48 +124,54 @@ public class SeleniumTest {
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
-@Test
-public void testRegistrationWithFirstNameEmptyField() throws InterruptedException {
-    driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
-    driver.findElement(By.id("first-name")).sendKeys("");
-    driver.findElement(By.id("last-name")).sendKeys("Rasiene");
-    driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
-    driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
-    driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
-    driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-    driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
-    driver.findElement(By.id("other")).click();
-
-    WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-    sleep(2000);
-
-    driver.findElement(By.id("country")).sendKeys("Lithuania");
-    driver.findElement(By.id("privacy-policy")).click();
-
-    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
-
-    sleep(5000);
-
-    WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-    assertEquals("This field is required", errorMessage.getText(), "Error message should match");
-
-    }
     @Test
-    public void testRegistrationWithTooShortFirstName() throws InterruptedException {
+    public void testRegistrationWithFirstNameEmptyField() {
+        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+        driver.findElement(By.id("first-name")).sendKeys("");
+        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+        driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
+        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+        driver.findElement(By.id("other")).click();
+
+        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
+
+        driver.findElement(By.id("country")).sendKeys("Lithuania");
+        driver.findElement(By.id("privacy-policy")).click();
+
+        actions.moveToElement(submitButton).click().perform();
+
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
+
+        assertEquals("This field is required", errorMessage.getText(), "Error message should match");
+    }
+
+    @Test
+    public void testRegistrationWithTooShortFirstName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("R");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -169,21 +183,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTooLongFirstName() throws InterruptedException {
+    public void testRegistrationWithTooLongFirstName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Aldrenizorilamantheusgrodinorastelvimundilcaranorbrastianopereidronimalkastorvelianorximandrathionelbriorbelindrospharomandarithoromantilonarcrestiphonaldomitharielzonophralindionzelkathrotharianorilcanthiorbelinorothianelphrothramondorivelintharimundronisthal");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -195,17 +212,20 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Maximum length is 135 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
@@ -235,7 +255,7 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithLastNameEmptyField() throws InterruptedException {
+    public void testRegistrationWithLastNameEmptyField() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("");
@@ -247,22 +267,25 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("This field is required", errorMessage.getText(), "Error message should match");
     }
 
     @Test
-    public void testRegistrationWithTooShortLastName() throws InterruptedException {
+    public void testRegistrationWithTooShortLastName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("R");
@@ -274,21 +297,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTooLongLastName() throws InterruptedException {
+    public void testRegistrationWithTooLongLastName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Eldranorithanovelimustorianthropelmindoravianthrasilomandorinelviorbresthalianorimandrilostarventhionpharostilmorandivoltrenphoraxisthalen");
@@ -300,21 +326,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Maximum length is 100 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTwoConsecutiveSpacesInDisplayName() throws InterruptedException {
+    public void testRegistrationWithTwoConsecutiveSpacesInDisplayName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -326,21 +355,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("You can only enter English letters or numbers. At least 1 character long. Cannot begin or end with a space. No more than one space between words", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithDisplayNameEmptyField() throws InterruptedException {
+    public void testRegistrationWithDisplayNameEmptyField() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -352,17 +384,20 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("This field is required", errorMessage.getText(), "Error message should match");
     }
     @Test
@@ -378,15 +413,18 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
 
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
@@ -399,22 +437,22 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        actions.moveToElement(submitButton).perform();
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Already exists", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithNonUniqueDisplayEmail() throws InterruptedException {
-        // Register the first user with the display name "rasosLasas"
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -426,41 +464,46 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
 
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
-        driver.findElement(By.id("displayName")).sendKeys("rasosLasasLasas"); // Same display name
-        driver.findElement(By.id("email")).sendKeys("rasoslasas@gmail.com");
+        driver.findElement(By.id("displayName")).sendKeys("rasosLasasLasas"); // Different display name
+        driver.findElement(By.id("email")).sendKeys("rasoslasas@gmail.com"); // Same email
         driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
         driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
         driver.findElement(By.id("other")).click();
 
         submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        actions.moveToElement(submitButton).perform();
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
+
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Already exists", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTooLongDisplayName() throws InterruptedException {
+    public void testRegistrationWithTooLongDisplayName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -472,21 +515,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Maximum length is 255 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTooShortEmail() throws InterruptedException {
+    public void testRegistrationWithTooShortEmail() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -498,21 +544,24 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("May only contain English letters, all lowercase. Can contain numbers, and these symbols ._-", errorMessage.getText(), "Error message should match");
     }
     @Test
-    public void testRegistrationWithTooLongEmail() throws InterruptedException {
+    public void testRegistrationWithTooLongEmail() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
         driver.findElement(By.id("first-name")).sendKeys("Rasa");
         driver.findElement(By.id("last-name")).sendKeys("Rasiene");
@@ -524,17 +573,20 @@ public void testRegistrationWithFirstNameEmptyField() throws InterruptedExceptio
         driver.findElement(By.id("other")).click();
 
         WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
-        sleep(2000);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(submitButton).perform();
+
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
 
         driver.findElement(By.id("country")).sendKeys("Lithuania");
         driver.findElement(By.id("privacy-policy")).click();
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
+        actions.moveToElement(submitButton).click().perform();
 
-        sleep(5000);
+        WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
         assertEquals("Maximum length 200 characters", errorMessage.getText(), "Error message should match");
     }
 }
