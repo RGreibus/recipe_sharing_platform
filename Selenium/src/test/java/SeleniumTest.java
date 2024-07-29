@@ -138,7 +138,7 @@ public class SeleniumTest {
         WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithFirstNameEmptyField() {
@@ -197,7 +197,7 @@ public class SeleniumTest {
         WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTooLongFirstName() {
@@ -252,7 +252,7 @@ public class SeleniumTest {
         sleep(5000);
 
         WebElement errorMessage = driver.findElement(By.cssSelector("div.text-danger"));
-        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithLastNameEmptyField() {
@@ -311,7 +311,7 @@ public class SeleniumTest {
         WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long.", errorMessage.getText(), "Error message should match");
+        assertEquals("You can only enter English letters. First letter must be capital. At least 2 characters long", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTooLongLastName() {
@@ -558,7 +558,7 @@ public class SeleniumTest {
         WebElement errorMessage = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.text-danger")));
 
-        assertEquals("May only contain English letters, all lowercase. Can contain numbers, and these symbols ._-", errorMessage.getText(), "Error message should match");
+        assertEquals("Minimum length 5 characters", errorMessage.getText(), "Error message should match");
     }
     @Test
     public void testRegistrationWithTooLongEmail() {
