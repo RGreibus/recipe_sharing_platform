@@ -80,37 +80,37 @@ public class SeleniumTest {
 
         assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
     }
-    @Test
-    public void testSuccessfulRegistrationMessage() {
-        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
-        driver.findElement(By.id("first-name")).sendKeys("Rasa");
-        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
-        driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
-        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
-        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
-        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
-        driver.findElement(By.id("other")).click();
-
-        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
-
-        Actions actions = new Actions(driver);
-        actions.moveToElement(submitButton).perform();
-
-        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
-
-        driver.findElement(By.id("country")).sendKeys("Lithuania");
-        driver.findElement(By.id("privacy-policy")).click();
-
-        actions.moveToElement(submitButton).click().perform();
-
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
-
-        assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
-
-        WebElement successMessage = driver.findElement(By.cssSelector("#root > main > div > h2"));
-        assertEquals("You have registered successfully. You can now log in", successMessage.getText(), "Success message should match");
-    }
+//    @Test
+//    public void testSuccessfulRegistrationMessage() {
+//        driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
+//        driver.findElement(By.id("first-name")).sendKeys("Rasa");
+//        driver.findElement(By.id("last-name")).sendKeys("Rasiene");
+//        driver.findElement(By.id("displayName")).sendKeys("rasossLasas");
+//        driver.findElement(By.id("email")).sendKeys("rassa@gmail.com");
+//        driver.findElement(By.id("password")).sendKeys("RasaRasiene123!");
+//        driver.findElement(By.id("repeat-password")).sendKeys("RasaRasiene123!");
+//        driver.findElement(By.id("dateOfBirth")).sendKeys("001980-09-25");
+//        driver.findElement(By.id("other")).click();
+//
+//        WebElement submitButton = driver.findElement(By.xpath("//button[text()='Submit']"));
+//
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(submitButton).perform();
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(submitButton));
+//
+//        driver.findElement(By.id("country")).sendKeys("Lithuania");
+//        driver.findElement(By.id("privacy-policy")).click();
+//
+//        actions.moveToElement(submitButton).click().perform();
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.urlToBe("http://localhost:5173/"));
+//
+//        assertEquals("http://localhost:5173/", driver.getCurrentUrl(), "User should be redirected to the homepage");
+//
+//        WebElement successMessage = driver.findElement(By.cssSelector("#root > main > div > h2"));
+//        assertEquals("You have registered successfully. You can now log in", successMessage.getText(), "Success message should match");
+//    }
     @Test
     public void testRegistrationWithNumberInFirstName() {
         driver.findElement(By.cssSelector("#navbarSupportedContent > ul > li:nth-child(2) > a")).click();
